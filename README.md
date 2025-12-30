@@ -8,37 +8,30 @@ The system has a three-tier hierarchy:
 
 # How It Works
 
-1. PPO Agents -> (agents/ppo_agent.py)
+1. PPO Agents: agents/ppo_agent.py
    
 Trains on Gymnasium environments (CartPole-v1)
-Can get/set model parameters as numpy arrays for federated aggregation
-Provides training and evaluation methods with metrics tracking
+Can both get and set model parameters for federated aggregation
 
-2. PPO Flower Clients -> (clients/ppo_flower_client.py)
+2. PPO Flower Clients: clients/ppo_flower_client.py
 
-Converts PPO agents into Flower federated learning clients:
-fit(): Trains locally for specified timesteps, returns updated parameters
-evaluate(): Evaluates the model locally, returns performance metrics
+Converts PPO agents into Flower federated learning clients
 
-3. Local Servers -> (local_server_agent/)
+3. Local Servers: local_server_agent/
 
 Acts as both a server & a client:
 Receives global model, returns aggregated local updates
-Manages multiple PPO clients using Flower simulation
+Manages multiple PPO clients
+Aggregates PPO client metrics, such as rewards, losses & timesteps
 
-Aggregates PPO client metrics (rewards, losses, timesteps)
-
-4. Global Server -> (servers/global_server_h.py)
+4. Global Server: servers/global_server_h.py
 
 Coordinates multiple local servers
 Uses custom FedRLStrategy for aggregation
 Performs centralized evaluation on the global model
-Aggregates metrics across all local servers
 
-5. Custom FL Strategy -> (servers/strategies/fed_rl_strategy.py)
-
-Extends Flower's base strategy
-Implements weighted parameter averaging based on timesteps
+5. Custom FL Strategy: servers/strategies/fed_rl_strategy.py
+   
 Supports both:
 Federated evaluation: Clients evaluate locally
 Centralized evaluation: Server evaluates global model
