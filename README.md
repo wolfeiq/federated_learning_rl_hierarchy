@@ -41,6 +41,7 @@ The system has a three-tier hierarchy:
 This file servers/one_agent_rl.py is for a RL scenario in Holoocean (Unreal Engine). It doesn't work properly and I've rewritten the script ever since.
 
 
+```mermaid
 graph TD
     %% Styling
     classDef global fill:#2c3e50,stroke:#34495e,stroke-width:2px,color:white;
