@@ -91,5 +91,5 @@ graph TD
     LS1 -- Local Model Parameters --> FC
     FC -- Gradients/Weights<br/>& RL Metrics --> LS1
 
-    %% Legend
+    %% Legend - Fixed Line Below
     linkStyle default stroke-width:2px,fill:none,stroke:#bdc3c7;
